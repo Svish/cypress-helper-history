@@ -1,0 +1,76 @@
+{
+  "name": "cypress-helper-history",
+  "version": "0.0.1",
+  "description": "A Cypress command for navigating via the History API in Cypress tests",
+  "keywords": [
+    "cypress",
+    "helper",
+    "history",
+    "typescript"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "prepare": "tsc",
+    "watch": "tsc --watch --preserveWatchOutput --listEmittedFiles",
+    "start": "run-p --silent --race watch cypress:open",
+    "test": "run-s --silent --print-name clean prepare lint:* cypress:run",
+    "cypress:open": "cypress open --project test",
+    "cypress:run": "cypress run --project test",
+    "lint": "run-p --silent --aggregate-output --continue-on-error --aggregate-output lint:*",
+    "lint:ts": "tsc --noEmit",
+    "lint:prettier": "prettier --ignore-path .lintignore --list-different \"**/*\"",
+    "clean": "rimraf dist",
+    "release": "release-it",
+    "update": "npm-check --update"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
+  "release-it": {
+    "git": {
+      "tagName": "v%s",
+      "commitArgs": "--gpg-sign --no-verify",
+      "tagArgs": "--sign"
+    },
+    "github": {
+      "release": true
+    },
+    "hooks": {
+      "before:init": [
+        "npm test"
+      ]
+    }
+  },
+  "author": "Torleif Berger <torleif@outlook.com> (https://www.geekality.net)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svish/cypress-helper-history"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "cypress": ">=0.20.0",
+    "history": ">=4.10.1"
+  },
+  "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.0",
+    "@types/history": "^4.7.3",
+    "@types/mocha": "^5.2.7",
+    "cypress": "^3.8.1",
+    "history": "^4.10.1",
+    "husky": "^4.0.0",
+    "npm-check": "^5.9.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "release-it": "^12.3.5",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "projectId": "cypress-helper-history",
+  "integrationFolder": "tests",
+  "fixturesFolder": "fixtures",
+  "supportFile": "support.js",
+  "pluginsFile": "plugins.js",
+  "video": false
+}
