@@ -16,7 +16,7 @@ npm install --save-dev cypress-helper-history
 
 ```js
 // E.g. in cypress/support/index.js
-include 'cypress-helper-history';
+import 'cypress-helper-history';
 ```
 
 ## Usage
