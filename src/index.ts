@@ -1,4 +1,4 @@
-/// <reference path="./globals.ts"/>
+/// <reference path="./types.ts"/>
 
 import navigate from './navigate';
 import { HISTORY } from './common';
