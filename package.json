@@ -1,6 +1,6 @@
 {
   "name": "cypress-helper-history",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A Cypress command for navigating via the History API in Cypress tests",
   "keywords": [
     "cypress",
