@@ -1,33 +1,33 @@
-import history from './history';
+import { History } from 'history';
 
-/**
- * Navigate via History API. Simple SPA alternative to `cy.visit`.
- *
- * Tries using `cy.history`, but falls back to `window.history` if not set up.
- *
- * @example
- *     cy.navigate('/foobar');
- */
+const KEY = '__chh__history__';
+
 export default function navigate(
   path: string,
+  state?: unknown,
   options?: Partial<Cypress.Loggable>
-): Promise<void> {
+): void {
   const shouldLog = options && options.log;
-  let logger: Cypress.Log;
+
+  const window = (cy as any).state('window');
+  const history = window[KEY] as History<unknown>;
 
   if (shouldLog !== false)
-    logger = Cypress.log({
+    Cypress.log({
       name: 'navigate',
       displayName: 'Navigate',
       message: [path],
+      consoleProps: () => ({
+        path,
+        state,
+        used: history ? 'history.push' : 'window.history.pushState',
+        instance: history ?? window.history,
+      }),
     });
 
-  return history()
-    .then(history => {
-      history.push(path);
-    })
-    .catch(() => {
-      const window = (cy as any).state('window');
-      window.history.pushState(undefined, '', path);
-    });
+  if (history) {
+    history.push(path, state);
+  } else {
+    window.history.pushState(state, '', path);
+  }
 }
