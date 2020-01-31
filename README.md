@@ -14,7 +14,7 @@ Uses [`window.history.pushState`](https://developer.mozilla.org/en-US/docs/Web/A
 npm install --save-dev cypress-helper-history
 ```
 
-### 2. Include Cypress command
+### 2. Import Cypress command
 
 ```js
 // E.g. in cypress/support/index.js
@@ -32,7 +32,7 @@ import { createBrowserHistory as createHistory } from 'history';
 const history = createHistory();
 export default history;
 
-// Then expose it to this helper:
+// Then expose it to the helper like this:
 if ('Cypress' in window) {
   window.__chh__history__ = history;
 }
