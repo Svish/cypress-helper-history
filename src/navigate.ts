@@ -7,10 +7,10 @@ export default function navigate(
   state?: unknown,
   options?: Partial<Cypress.Loggable>
 ): void {
-  const shouldLog = options && options.log;
+  const shouldLog = options?.log;
 
   const window = (cy as any).state('window');
-  const history = window[KEY] as History<unknown>;
+  const history = window[KEY] as Pick<History<unknown>, 'push'>;
 
   if (shouldLog !== false)
     Cypress.log({
