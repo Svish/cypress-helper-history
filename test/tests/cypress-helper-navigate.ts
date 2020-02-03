@@ -31,9 +31,9 @@ describe('cypress-helper-navigate', () => {
 
           cy.navigate(PATH, 'foobar');
 
-          cy.wait(0).then(() => {
-            expect(history.push).to.have.been.called;
-          });
+          cy.wrap(history)
+            .its('push')
+            .should('have.been.called');
         });
       });
     });
